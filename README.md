@@ -7,9 +7,9 @@
 ![Power Query](https://img.shields.io/badge/Power%20Query-M-217346?style=flat)
 ![Google Sheets](https://img.shields.io/badge/Google%20Sheets-34A853?style=flat&logo=googlesheets&logoColor=white)
 
-<p align="center"><img src="docs/pages/01-all-summary.svg" width="100%" alt="All Summary page layout"></p>
+<p align="center"><img src="docs/screenshots/01-all-summary.png" width="100%" alt="All Summary page"></p>
 
-> Built for a knitted-apparel manufacturer. The report runs on live company data, so the `.pbix` and its data are not published. Page images are layout wireframes generated from the report definition, and the DAX is exported from the model.
+> Built for a knitted-apparel manufacturer. Screenshots are taken from the live report, so the figures are a point-in-time snapshot. The `.pbix` file is not included. The DAX is exported from the model.
 
 ---
 
@@ -31,13 +31,13 @@ Imported yarn is bought on proforma invoices with an advance and a balance payme
 
 | Page | Answers | |
 |---|---|---|
-| **All Summary** | KPI cards, payment and shipping status by vendor, vendor-wise summary (invoices, qty, value, balance, % paid, received / in-transit / not-shipped counts) | [layout](docs/pages/01-all-summary.svg) |
-| **Vendor Wise** | Yarn-wise matrix per vendor, duty value by ETA, balance payable by due date | [layout](docs/pages/02-vendor-wise.svg) |
+| **All Summary** | KPI cards, payment and shipping status by vendor, vendor-wise summary (invoices, qty, value, balance, % paid, received / in-transit / not-shipped counts) | [screenshot](docs/screenshots/01-all-summary.png) |
+| **Vendor Wise** | Yarn-wise matrix per vendor, duty value by ETA, balance payable by due date | [screenshot](docs/screenshots/02-vendor-wise.png) |
 
 <details>
-<summary>Show the Vendor Wise page layout</summary>
+<summary>Show the Vendor Wise page</summary>
 
-<img src="docs/pages/02-vendor-wise.svg" width="100%" alt="Vendor wise">
+<img src="docs/screenshots/02-vendor-wise.png" width="100%" alt="Vendor wise">
 </details>
 
 ## DAX highlights
@@ -71,4 +71,4 @@ All 12 measures: [`dax/model.dax`](dax/model.dax).
 `Power BI` `DAX (SUMMARIZE-based distinct counts, CALCULATE filters)` `Power Query data-quality checks` `Procurement & import finance` `KPI design`
 
 ---
-<sub>Author: <a href="https://github.com/Sharmaji12369">Srijan Sharma</a> · Data & BI Analyst. Shared as a portfolio piece; the report, data and internal references belong to the employer and are not included.</sub>
+<sub>Author: <a href="https://github.com/Sharmaji12369">Srijan Sharma</a> · Data & BI Analyst. Shared as a portfolio piece; the report file itself belongs to the employer and is not included.</sub>
