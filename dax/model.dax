@@ -1,0 +1,91 @@
+// Measures, calculated columns and calculated tables exported from the semantic model.
+// Table and column names are as built; a few internal site / partner codes are anonymised.
+
+// ======================================================================
+// TABLE: YarnInvoices
+// ======================================================================
+
+-- Calculated column
+YarnInvoices[Yarn ID] =
+    YarnInvoices[YARN] & "-" & YarnInvoices[Container Unique ID]
+
+-- Measure   // format: \$#,0;(\$#,0);\$#,0
+[Total Invoice Value] :=
+    SUM(YarnInvoices[Total])
+
+-- Measure   // format: \$#,0;(\$#,0);\$#,0
+[Total Advance to Pay] :=
+    SUM(YarnInvoices[Advance to pay])
+
+-- Measure   // format: \$#,0;(\$#,0);\$#,0
+[Total Balance to Pay] :=
+    SUM(YarnInvoices[Balance to pay in USD])
+
+-- Measure   // format: 0
+[Total Invoices] :=
+    COUNTROWS (
+        SUMMARIZE (
+            YarnInvoices,
+            YarnInvoices[Container Unique ID],
+            YarnInvoices[Invoice Number/ PI Number]
+        )
+    )
+
+-- Measure   // format: 0
+[Total Vendors] :=
+    DISTINCTCOUNT(YarnInvoices[VENDOR])
+
+-- Measure   // format: 0.00
+[Total Qty] :=
+    SUM(YarnInvoices[Invoice qty in Kgs])
+
+-- Measure   // format: "₹"\ #,0.###############;#,0.###############\ -"₹";"₹"\ #,0.###############
+[Amount Paid] :=
+    [Total Invoice Value] - [Total Balance to Pay]
+
+-- Measure   // format: 0.00%;-0.00%;0.00%
+[% Paid] :=
+    DIVIDE([Amount Paid], [Total Invoice Value], 0)
+
+-- Measure   // format: 0
+[Received Count] :=
+    CALCULATE(
+        COUNTROWS (
+        SUMMARIZE (
+            YarnInvoices,
+            YarnInvoices[Container Unique ID],
+            YarnInvoices[Invoice Number/ PI Number]
+        )
+    ),
+        YarnInvoices[Shipping Status] = "Received Inhouse"
+    )
+
+-- Measure   // format: 0
+[In Transit Count] :=
+    CALCULATE(
+        COUNTROWS (
+        SUMMARIZE (
+            YarnInvoices,
+            YarnInvoices[Container Unique ID],
+            YarnInvoices[Invoice Number/ PI Number]
+        )
+    ),
+        YarnInvoices[Shipping Status] = "Shipped Intransit"
+    )
+
+-- Measure   // format: 0
+[Not Shipped Count] :=
+    CALCULATE(
+        COUNTROWS (
+        SUMMARIZE (
+            YarnInvoices,
+            YarnInvoices[Container Unique ID],
+            YarnInvoices[Invoice Number/ PI Number]
+        )
+    ),
+        YarnInvoices[Shipping Status] = "Not Shipped"
+    )
+
+-- Measure   // format: 0
+[Total Duty Value] :=
+    SUM(YarnInvoices[Duty value])
